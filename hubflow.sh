@@ -3,7 +3,7 @@ echo "Installing Hubflow"
 git clone https://github.com/datasift/gitflow
 cd gitflow
 sudo ./install.sh
-echo "Upgrating Hubflow"
+echo "Upgrading Hubflow"
 sudo git hf upgrade
 echo "Done"
 echo "Hubflow at version $(git hf version)"
