@@ -1,4 +1,0 @@
-MAILTO=""
-*/1 * * * * DISPLAY=:0 GSETTINGS_BACKEND=dconf gsettings set org.gnome.desktop.background picture-uri "file:///home/kairotavares/troll.jpg"
-
-wget -O youmustchangeyourpassword.jpg http://fc00.deviantart.net/fs71/f/2012/158/e/4/wallpaper_troll_face_by_brunowalker-d52nuhb.jpg
