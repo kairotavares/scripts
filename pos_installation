@@ -1,0 +1,60 @@
+Go to Tools -> Options -> Devices
+1-) Add
+2-) Choose 'Generic Linux Device'
+3-) Set fields:
+name: Beaglebone
+ip: 192.168.7.2 (if usb connection)
+user name: root
+password: (leave empty)
+4-) See if connects. If not, make sure that ip, username and password is the same as your device
+5-) After connection, apply configuration
+
+Go to Tools -> Options -> Build & Run
+
+On the tab QT Versions:
+1-) Choose add
+2-) Select /usr/local/angstrom/arm/bin/qmake
+
+On the tab Compilers:
+1-) Choose add -> GCC
+2-) Change name to Beaglebone GCC
+3-) Select Compiler path: /usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-g++
+
+On the tab Kits:
+Add new kit called Beaglebone and set:
+Name: Beaglebone kit
+Device type: Generic Linux Device
+Device: Beaglebone
+Compiler: BeagleBone GCC
+Debugger: /usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-gdb
+QT Version: QT 4.6.3 (arm)
+
+Copy-paste on Tab Projects -> BeagleBone kit -> Build Environment
+Click on batch edit and paste the follow:
+
+export SDK_PATH=/usr/local/angstrom/arm
+export TARGET_SYS=/usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi
+export PATH=$SDK_PATH/bin:$PATH
+export CPATH=$SDK_PATH/$TARGET_SYS/usr/include:$CPATH
+export LIBTOOL_SYSROOT_PATH=$SDK_PATH/$TARGET_SYS
+export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH/$TARGET_SYS
+export PKG_CONFIG_PATH=$SDK_PATH/$TARGET_SYS/usr/lib/pkgconfig
+export CONFIG_SITE=$SDK_PATH/site-config
+alias opkg="LD_LIBRARY_PATH=$SDK_PATH/lib $SDK_PATH/bin/opkg-cl -f $SDK_PATH//etc/opkg-sdk.conf -o $SDK_PATH"
+alias opkg-target="LD_LIBRARY_PATH=$SDK_PATH/lib $SDK_PATH/bin/opkg-cl -f $SDK_PATH/$TARGET_SYS/etc/opkg.conf -o $SDK_PATH/$TARGET_SYS"
+export OE_QMAKE_CC=/usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-gcc
+export OE_QMAKE_CXX=/usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-g++
+export OE_QMAKE_LINK=/usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-g++
+export OE_QMAKE_AR=/usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-ar
+export OE_QMAKE_LIBDIR_QT=/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi//usr/lib
+export OE_QMAKE_INCDIR_QT=/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi//usr/include/qtopia
+export OE_QMAKE_MOC=/usr/local/angstrom/arm/bin/moc4
+export OE_QMAKE_UIC=/usr/local/angstrom/arm/bin/uic4
+export OE_QMAKE_UIC3=/usr/local/angstrom/arm/bin/uic34
+export OE_QMAKE_RCC=/usr/local/angstrom/arm/bin/rcc4
+export OE_QMAKE_QDBUSCPP2XML=/usr/local/angstrom/arm/bin/qdbuscpp2xml4
+export OE_QMAKE_QDBUSXML2CPP=/usr/local/angstrom/arm/bin/qdbusxml2cpp4
+export OE_QMAKE_QT_CONFIG=/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi//usr/share/qtopia/mkspecs/qconfig.pri
+export QMAKESPEC=/usr/local/angstrom/arm/arm-angstrom-linux-gnueabi//usr/share/qtopia/mkspecs/linux-g++
+
+Do the same to Release and Debug 
